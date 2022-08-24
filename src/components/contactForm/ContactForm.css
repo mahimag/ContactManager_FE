@@ -1,0 +1,19 @@
+#contactForm{
+    /* width: 400px;
+    display: inline;
+    justify-content: right;
+    align-items: center; */
+    width: 400px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+#contactForm label{
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+#contactForm .contactForm__btn{
+    margin-top: 45px;
+}

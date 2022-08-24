@@ -1,0 +1,12 @@
+#loginForm {
+    width: 400px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
+}
+
+#loginForm .loginForm__btn {
+    margin-top: 40px;
+    width: 70%;
+}

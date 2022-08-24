@@ -1,0 +1,26 @@
+.contactbook{
+    width: 100%;
+    display: inline-table;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 0px 70px;
+}
+.actions a{
+    padding: 10px;
+    margin-left: 10px;
+}
+
+/* .actions{
+    display: inline-block;
+
+.appointment {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column  ;
+}
+
+
+} */

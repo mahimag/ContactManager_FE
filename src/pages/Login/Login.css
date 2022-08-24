@@ -1,0 +1,36 @@
+.login {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: white;
+    padding: 3em;
+    box-shadow: 0 0px 10px;
+}
+
+/* .box {
+    background: white;
+    padding: 2em;
+    color: red;
+    box-shadow: 0 0 20px -10px;
+} */
+
+.login .login__title {
+    margin-bottom: 10px;
+}
+
+.ant-typography + h1.ant-typography, .ant-typography + h2.ant-typography, .ant-typography + h3.ant-typography, .ant-typography + h4.ant-typography, .ant-typography + h5.ant-typography {
+    margin-top: 10px;
+}
+
+.login .login__subtitle {
+    margin-bottom: 40px;
+}

@@ -1,0 +1,19 @@
+#registerForm {
+    width: 400px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+#registerForm .registerForm__btn {
+    margin-top: 40px;
+    width: 70%;
+}
+
+#registerForm .registerForm__item {
+    padding-left: 100px;
+}
+
+#registerForm a {
+    margin-left: 10px;
+}
