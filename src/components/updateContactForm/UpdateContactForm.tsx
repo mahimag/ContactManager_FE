@@ -1,12 +1,13 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Upload, Checkbox } from "antd";
-import { Contact } from "../../interfaces/Contact";
-import "./ContactForm.css";
-import { useState } from "react";
+import { Contact, ContactToUpdate } from "../../interfaces/Contact";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import "./UpdateContactForm.css";
+import { response } from "express";
 
-interface ContactFormInterface {
+interface UpdateContactFormInterface {
   oldData?: Contact;
 }
 
@@ -18,10 +19,34 @@ const normFile = (e: any) => {
   return e?.fileList;
 };
 
-const ContactForm = (props: ContactFormInterface) => {
+const UpdateContactForm = (props: UpdateContactFormInterface) => {
+  const { id } = useParams();
+  console.log(id);
+  const [data, setData] = useState<ContactToUpdate>();
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   // const dispatch = useDispatch();
-
+  useEffect(() => {
+    setIsLoading(true);
+    console.log("this is id", id);
+    axios
+      .get(`http://localhost:3001/contacts/${id}`)
+      .then((response) => {
+        console.log(response);
+        const data = response.data.data;
+        setData({
+          firstname: data.firstname,
+          lastname: data.lastname,
+          email: data.email,
+          number: data.number,
+          address: data.address,
+          isFav: [data.isFav],
+          photo: [],
+        });
+        setIsLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []);
   const [fav, setFav] = useState<boolean>(false);
 
   const onFinish = async (values: any) => {
@@ -37,10 +62,11 @@ const ContactForm = (props: ContactFormInterface) => {
     formData.append("photo", values.upload[0].originFileObj);
     formData.append("is_fav", `${fav}`);
     formData.append("user_id", "1");
+    formData.append("id", "1");
 
     try {
-      const res = await axios("http://localhost:3001/contacts/", {
-        method: "POST",
+      const res = await axios(`http://localhost:3001/contacts/${id}`, {
+        method: "PUT",
         data: formData,
         headers: {
           "Content-Type": "multipart/form-data",
@@ -48,7 +74,7 @@ const ContactForm = (props: ContactFormInterface) => {
       });
 
       if (res.data.data) {
-        console.log("Contact created successfully");
+        console.log("Contact updated successfully");
         navigate("/home");
       }
     } catch (error) {
@@ -63,17 +89,19 @@ const ContactForm = (props: ContactFormInterface) => {
     console.log("Failed:", errorInfo);
   };
 
-  return (
+  return isLoading ? (
+    <div>Loading</div>
+  ) : (
     <Form
       name="basic"
       // labelCol={{ span: 9 }}
       // wrapperCol={{ span: 15 }}
-      initialValues={{ remember: true }}
+      initialValues={data}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
       size="large"
-      id="contactForm"
+      id="UpdateContactForm"
       // style={{ width: "400px" }}
     >
       <Form.Item
@@ -127,14 +155,14 @@ const ContactForm = (props: ContactFormInterface) => {
         </Upload>
       </Form.Item>
 
-      <Form.Item name="fav" label="Fav">
+      <Form.Item name="isFav" label="Fav">
         <Checkbox.Group>
           <Checkbox value={true} onChange={(e) => setFav(e.target.checked)} />
         </Checkbox.Group>
       </Form.Item>
 
       <Form.Item
-        className="ContactForm__btn"
+        className="UpdateContactForm__btn"
         wrapperCol={{ offset: 11, span: 16 }}
       >
         <Button type="primary" htmlType="submit">
@@ -145,4 +173,4 @@ const ContactForm = (props: ContactFormInterface) => {
   );
 };
 
-export default ContactForm;
+export default UpdateContactForm;

@@ -1,5 +1,3 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 // import { Wrapper, Content, NavLeft, NavRight } from "./Navbar.styles";
 import "./styles.css";
 

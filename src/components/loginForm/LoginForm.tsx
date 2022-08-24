@@ -12,7 +12,7 @@ const LoginForm: React.FC = () => {
   const onFinish = (values: any) => {
     if (values.email === "email" && values.password === "password") {
       dispatch(setLoggedIn(true));
-      navigate("../home");
+      navigate("/home");
     } else {
       dispatch(setLoggedIn(false));
     }

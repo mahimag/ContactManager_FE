@@ -1,15 +1,16 @@
-import { Table } from "antd";
+import { Table, Button } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import React from "react";
-import { HeartOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
+import { HeartOutlined, HeartFilled } from "@ant-design/icons";
 import "./ContactBook.css";
 import { Contact } from "../../interfaces/Contact";
+import axios from "axios";
 
-interface DataType {
-  key: React.Key;
-  name: string;
-  number: string;
-}
+const onDeleteHandler = async (id: number) => {
+  console.log(id);
+  await axios.delete(`http://localhost:3001/contacts/${id}`);
+  window.location.reload();
+};
 
 const columns: ColumnsType<Contact> = [
   {
@@ -23,40 +24,59 @@ const columns: ColumnsType<Contact> = [
           height: "80px",
         }}
         src={url}
+        alt={url}
       />
     ),
   },
-  { title: "Name", dataIndex: "name", key: "name" },
+  { title: "Name", dataIndex: "firstname", key: "firstname" },
   { title: "Number", dataIndex: "number", key: "number" },
+  {
+    title: "Favorite",
+    dataIndex: "isFav",
+    key: "isFav",
+    render: (_, record) => {
+      console.log(record);
+      return record.isFav ? <HeartFilled /> : <HeartOutlined />;
+    },
+  },
   {
     title: "Action",
     dataIndex: "",
     key: "x",
-    render: () => (
+    render: (_, record) => (
       <div className="actions">
-        <HeartOutlined />
-        <a href="/newcontact">Update</a>
-        <a>Delete</a>
+        <Button
+          onClick={() => {
+            onDeleteHandler(+record.id);
+          }}
+        >
+          Delete
+        </Button>
+        <Button>
+          <a href={`/update/${record.id}`}>Update</a>
+        </Button>
       </div>
     ),
   },
 ];
 
-const data: DataType[] = [
-  {
-    key: 1,
-    name: "John Brown",
-    number: "4256159080",
-  },
-  {
-    key: 2,
-    name: "Jim Green",
-    number: "4251234567",
-  },
-];
+const ContactBook: React.FC = () => {
+  useEffect(() => {
+    getData(1);
+  }, []);
 
-const ContactBook: React.FC = () => (
-  <Table className="contactbook" columns={columns} dataSource={data} />
-);
+  const getData = (id: number) => {
+    axios
+      .get("http://localhost:3001/contacts")
+      .then((res) => {
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const [data, setData] = useState<Contact[]>([]);
+  return <Table className="contactbook" columns={columns} dataSource={data} />;
+};
 
 export default ContactBook;
