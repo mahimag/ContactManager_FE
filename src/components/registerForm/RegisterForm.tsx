@@ -49,6 +49,13 @@ const RegisterForm: React.FC = () => {
       </Form.Item>
 
       <Form.Item
+        name="email"
+        rules={[{ required: true, message: "Please input your email!" }]}
+      >
+        <Input placeholder="Email" />
+      </Form.Item>
+
+      <Form.Item
         name="password"
         rules={[{ required: true, message: "Please input your password!" }]}
       >

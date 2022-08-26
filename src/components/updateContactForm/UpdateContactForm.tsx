@@ -30,7 +30,7 @@ const UpdateContactForm = (props: UpdateContactFormInterface) => {
     setIsLoading(true);
     console.log("this is id", id);
     axios
-      .get(`http://localhost:3001/contacts/${id}`)
+      .get(`/contacts/${id}`)
       .then((response) => {
         console.log(response);
         const data = response.data.data;
@@ -65,7 +65,7 @@ const UpdateContactForm = (props: UpdateContactFormInterface) => {
     formData.append("id", "1");
 
     try {
-      const res = await axios(`http://localhost:3001/contacts/${id}`, {
+      const res = await axios(`/contacts/${id}`, {
         method: "PUT",
         data: formData,
         headers: {

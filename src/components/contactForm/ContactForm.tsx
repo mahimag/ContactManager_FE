@@ -39,7 +39,7 @@ const ContactForm = (props: ContactFormInterface) => {
     formData.append("user_id", "1");
 
     try {
-      const res = await axios("http://localhost:3001/contacts/", {
+      const res = await axios("/contacts/", {
         method: "POST",
         data: formData,
         headers: {

@@ -8,7 +8,7 @@ import axios from "axios";
 
 const onDeleteHandler = async (id: number) => {
   console.log(id);
-  await axios.delete(`http://localhost:3001/contacts/${id}`);
+  await axios.delete(`/contacts/${id}`);
   window.location.reload();
 };
 

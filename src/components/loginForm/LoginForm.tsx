@@ -1,20 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "../../features/LoginSlice";
 import "./LoginForm.css";
+import axios from "axios";
+import { User } from "../../interfaces/User";
+import { addAccessTokensToLocalStorage } from "../../utils/localStorage";
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onFinish = (values: any) => {
-    if (values.email === "email" && values.password === "password") {
-      dispatch(setLoggedIn(true));
-      navigate("/home");
-    } else {
-      dispatch(setLoggedIn(false));
+  const onFinish = async (values: any) => {
+    const credentials = {
+      email: values.email,
+      password: values.password,
+    };
+
+    try {
+      const res = await axios({
+        method: "POST",
+        url: "/signin",
+        data: credentials,
+      });
+
+      if (res.data) {
+        const data = res.data.data;
+        addAccessTokensToLocalStorage(data.accessToken, "true");
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${data.accessToken}`;
+        navigate("/contact");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
