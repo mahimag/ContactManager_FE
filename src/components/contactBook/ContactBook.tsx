@@ -7,7 +7,6 @@ import { Contact } from "../../interfaces/Contact";
 import axios from "axios";
 
 const onDeleteHandler = async (id: number) => {
-  console.log(id);
   await axios.delete(`/contacts/${id}`);
   window.location.reload();
 };
@@ -35,7 +34,6 @@ const columns: ColumnsType<Contact> = [
     dataIndex: "isFav",
     key: "isFav",
     render: (_, record) => {
-      console.log(record);
       return record.isFav ? <HeartFilled /> : <HeartOutlined />;
     },
   },
@@ -53,7 +51,7 @@ const columns: ColumnsType<Contact> = [
           Delete
         </Button>
         <Button>
-          <a href={`/update/${record.id}`}>Update</a>
+          <a href={`/contact/update/${record.id}`}>Update</a>
         </Button>
       </div>
     ),
@@ -66,8 +64,12 @@ const ContactBook: React.FC = () => {
   }, []);
 
   const getData = (id: number) => {
-    axios
-      .get("http://localhost:3001/contacts")
+    axios("/contacts", {
+      method: "POST",
+      data: {
+        id: localStorage.getItem("id"),
+      },
+    })
       .then((res) => {
         setData(res.data.data);
       })
@@ -76,7 +78,14 @@ const ContactBook: React.FC = () => {
       });
   };
   const [data, setData] = useState<Contact[]>([]);
-  return <Table className="contactbook" columns={columns} dataSource={data} />;
+  return (
+    <Table
+      className="contactbook"
+      columns={columns}
+      dataSource={data}
+      key="photo"
+    />
+  );
 };
 
 export default ContactBook;

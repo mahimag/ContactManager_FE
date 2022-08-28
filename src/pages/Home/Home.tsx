@@ -14,7 +14,7 @@ const Home: React.FC = () => {
       <NavBar />
       <Title className="home__title">Home</Title>
       <ContactBook />
-      <Button className="newcontact" onClick={() => navigate("/newcontact")}>
+      <Button className="newcontact" onClick={() => navigate("/contact/add")}>
         Add Contact
       </Button>
     </div>

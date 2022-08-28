@@ -1,26 +1,24 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import {
-  setPassword,
-  setRegistered,
-  setUsername,
-} from "../../features/RegisterSlice";
-import "./RegisterForm.css";
+import axios from "axios";
 
 const RegisterForm: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const onFinish = (values: any) => {
     if (values.password === values.confirmed) {
-      dispatch(setUsername(values.username));
-      dispatch(setPassword(values.password));
-      dispatch(setRegistered(true));
-      navigate("../");
+      axios("/signup", {
+        method: "POST",
+        data: {
+          email: values.email,
+          password: values.password,
+        },
+      })
+        .then((data) => navigate("/login"))
+        .catch((err) => console.log(err));
     } else {
-      dispatch(setRegistered(false));
+      console.log("Password doesn't match");
     }
   };
 
@@ -31,15 +29,12 @@ const RegisterForm: React.FC = () => {
   return (
     <Form
       name="basic"
-      // labelCol={{ span: 9 }}
-      // wrapperCol={{ span: 15 }}
       initialValues={{ remember: true }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
       size="large"
       id="registerForm"
-      // style={{ width: "400px" }}
     >
       <Form.Item
         name="username"

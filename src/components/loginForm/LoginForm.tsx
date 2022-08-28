@@ -1,16 +1,15 @@
-import React, { useState } from "react";
 import { Button, Form, Input } from "antd";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setLoggedIn } from "../../features/LoginSlice";
-import "./LoginForm.css";
 import axios from "axios";
-import { User } from "../../interfaces/User";
-import { addAccessTokensToLocalStorage } from "../../utils/localStorage";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  addAccessTokensToLocalStorage,
+  addDefaultsToAxios,
+} from "../../utils/localStorage";
+import "./LoginForm.css";
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const onFinish = async (values: any) => {
     const credentials = {
@@ -27,10 +26,9 @@ const LoginForm: React.FC = () => {
 
       if (res.data) {
         const data = res.data.data;
-        addAccessTokensToLocalStorage(data.accessToken, "true");
-        axios.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${data.accessToken}`;
+        console.log("data", data);
+        addAccessTokensToLocalStorage(data.accessToken, "true", data.id);
+        addDefaultsToAxios();
         navigate("/contact");
       }
     } catch (error) {

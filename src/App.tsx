@@ -1,21 +1,16 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
 import Routing from "./routing/Routing";
-import { store } from "./store";
-import "./App.css";
-import axios from "axios";
+import { BrowserRouter } from "react-router-dom";
 import { addDefaultsToAxios } from "./utils/localStorage";
+import "./App.css";
 
 const App: React.FC = () => {
   addDefaultsToAxios();
   return (
     <div className="App">
-      <Provider store={store}>
-        <BrowserRouter>
-          <Routing />
-        </BrowserRouter>
-      </Provider>
+      <BrowserRouter>
+        <Routing />
+      </BrowserRouter>
     </div>
   );
 };

@@ -1,14 +1,9 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Upload, Checkbox } from "antd";
-import { Contact } from "../../interfaces/Contact";
-import "./ContactForm.css";
-import { useState } from "react";
+import { Button, Checkbox, Form, Input, Upload } from "antd";
 import axios from "axios";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-interface ContactFormInterface {
-  oldData?: Contact;
-}
+import "./ContactForm.css";
 
 const normFile = (e: any) => {
   console.log("Upload event:", e);
@@ -18,28 +13,24 @@ const normFile = (e: any) => {
   return e?.fileList;
 };
 
-const ContactForm = (props: ContactFormInterface) => {
+const ContactForm = () => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
 
   const [fav, setFav] = useState<boolean>(false);
 
   const onFinish = async (values: any) => {
     const formData = new FormData();
-    console.log(values);
-    // const { userId } = getCredentialsFromLocalStorage;
     formData.append("firstname", values.firstname);
     formData.append("lastname", values.lastname);
     formData.append("email", values.email);
     formData.append("number", values.number);
     formData.append("address", values.address);
-    console.log(values.upload[0].originFileObj);
     formData.append("photo", values.upload[0].originFileObj);
     formData.append("is_fav", `${fav}`);
-    formData.append("user_id", "1");
+    formData.append("user_id", localStorage.getItem("id") as string);
 
     try {
-      const res = await axios("/contacts/", {
+      const res = await axios("/contacts/add", {
         method: "POST",
         data: formData,
         headers: {
@@ -49,15 +40,12 @@ const ContactForm = (props: ContactFormInterface) => {
 
       if (res.data.data) {
         console.log("Contact created successfully");
-        navigate("/home");
+        navigate("/contact");
       }
     } catch (error) {
       console.log(error);
     }
   };
-  // dispatch(setFirstName(values.firstname));
-  // dispatch(setLastName(values.lastname));
-  // dispatch(setNumber(values.number));
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
@@ -66,15 +54,12 @@ const ContactForm = (props: ContactFormInterface) => {
   return (
     <Form
       name="basic"
-      // labelCol={{ span: 9 }}
-      // wrapperCol={{ span: 15 }}
       initialValues={{ remember: true }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
       size="large"
       id="contactForm"
-      // style={{ width: "400px" }}
     >
       <Form.Item
         label="First Name"

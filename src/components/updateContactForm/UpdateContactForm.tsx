@@ -1,18 +1,17 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Upload, Checkbox } from "antd";
-import { Contact, ContactToUpdate } from "../../interfaces/Contact";
-import { useEffect, useState } from "react";
+import { Button, Checkbox, Form, Input, Upload } from "antd";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Contact, ContactToUpdate } from "../../interfaces/Contact";
+import { getUserId } from "../../utils/localStorage";
 import "./UpdateContactForm.css";
-import { response } from "express";
 
 interface UpdateContactFormInterface {
   oldData?: Contact;
 }
 
 const normFile = (e: any) => {
-  console.log("Upload event:", e);
   if (Array.isArray(e)) {
     return e;
   }
@@ -21,18 +20,18 @@ const normFile = (e: any) => {
 
 const UpdateContactForm = (props: UpdateContactFormInterface) => {
   const { id } = useParams();
-  console.log(id);
-  const [data, setData] = useState<ContactToUpdate>();
-  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
+  const [fav, setFav] = useState<boolean>(false);
+  const [data, setData] = useState<ContactToUpdate>();
+
+  //function checks for dependencies and when they change, it calls function inside useEffect
+
   useEffect(() => {
     setIsLoading(true);
-    console.log("this is id", id);
     axios
       .get(`/contacts/${id}`)
       .then((response) => {
-        console.log(response);
         const data = response.data.data;
         setData({
           firstname: data.firstname,
@@ -46,23 +45,19 @@ const UpdateContactForm = (props: UpdateContactFormInterface) => {
         setIsLoading(false);
       })
       .catch((error) => console.log(error));
-  }, []);
-  const [fav, setFav] = useState<boolean>(false);
+  }, [id]);
 
   const onFinish = async (values: any) => {
     const formData = new FormData();
-    console.log(values);
-    // const { userId } = getCredentialsFromLocalStorage;
     formData.append("firstname", values.firstname);
     formData.append("lastname", values.lastname);
     formData.append("email", values.email);
     formData.append("number", values.number);
     formData.append("address", values.address);
-    console.log(values.upload[0].originFileObj);
     formData.append("photo", values.upload[0].originFileObj);
     formData.append("is_fav", `${fav}`);
-    formData.append("user_id", "1");
-    formData.append("id", "1");
+    formData.append("user_id", getUserId());
+    formData.append("id", getUserId());
 
     try {
       const res = await axios(`/contacts/${id}`, {
@@ -74,16 +69,12 @@ const UpdateContactForm = (props: UpdateContactFormInterface) => {
       });
 
       if (res.data.data) {
-        console.log("Contact updated successfully");
-        navigate("/home");
+        navigate("/contact");
       }
     } catch (error) {
       console.log(error);
     }
   };
-  // dispatch(setFirstName(values.firstname));
-  // dispatch(setLastName(values.lastname));
-  // dispatch(setNumber(values.number));
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
@@ -94,15 +85,12 @@ const UpdateContactForm = (props: UpdateContactFormInterface) => {
   ) : (
     <Form
       name="basic"
-      // labelCol={{ span: 9 }}
-      // wrapperCol={{ span: 15 }}
       initialValues={data}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
       size="large"
       id="UpdateContactForm"
-      // style={{ width: "400px" }}
     >
       <Form.Item
         label="First Name"
