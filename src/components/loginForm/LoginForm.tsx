@@ -18,9 +18,8 @@ const LoginForm: React.FC = () => {
     };
 
     try {
-      const res = await axios({
+      const res = await axios("/signin", {
         method: "POST",
-        url: "/signin",
         data: credentials,
       });
 
@@ -43,15 +42,12 @@ const LoginForm: React.FC = () => {
   return (
     <Form
       name="basic"
-      // labelCol={{ span: 9 }}
-      // wrapperCol={{ span: 15 }}
       initialValues={{ remember: true }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
       size="large"
       id="loginForm"
-      // style={{ width: "400px" }}
     >
       <Form.Item
         name="email"

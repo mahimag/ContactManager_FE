@@ -38,6 +38,7 @@ const RegisterForm: React.FC = () => {
     >
       <Form.Item
         name="username"
+        id="registerForm__item"
         rules={[{ required: true, message: "Please input your username!" }]}
       >
         <Input placeholder="Username" />
@@ -45,6 +46,7 @@ const RegisterForm: React.FC = () => {
 
       <Form.Item
         name="email"
+        className="registerForm__item"
         rules={[{ required: true, message: "Please input your email!" }]}
       >
         <Input placeholder="Email" />
@@ -52,6 +54,7 @@ const RegisterForm: React.FC = () => {
 
       <Form.Item
         name="password"
+        className="registerForm__item"
         rules={[{ required: true, message: "Please input your password!" }]}
       >
         <Input.Password placeholder="Password" />
@@ -59,19 +62,17 @@ const RegisterForm: React.FC = () => {
 
       <Form.Item
         name="confirmed"
+        className="registerForm__item"
         rules={[{ required: true, message: "Please input your password!" }]}
       >
         <Input.Password placeholder="Confirm Password" />
       </Form.Item>
 
-      <Form.Item
-        className="registerForm__btn"
-        wrapperCol={{ offset: 11, span: 16 }}
-      >
+      <Form.Item id="registerForm__btn">
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
-        <a href="/">Cancel.</a>
+        <a href="/login">Cancel.</a>
       </Form.Item>
     </Form>
   );

@@ -2,6 +2,7 @@ import { Typography } from "antd";
 import React from "react";
 import NavBar from "../../components/navBar/index";
 import UpdateContactForm from "../../components/updateContactForm/UpdateContactForm";
+import "./UpdateContact.css";
 
 const UpdateContact: React.FC = () => {
   const { Title } = Typography;
@@ -9,8 +10,8 @@ const UpdateContact: React.FC = () => {
   return (
     <>
       <NavBar />
-      <div id="UpdateContact">
-        <Title className="UpdateContact__title">UpdateContact</Title>
+      <div id="updateContact">
+        <Title className="updateContact__title">UpdateContact</Title>
         <UpdateContactForm />
       </div>
     </>

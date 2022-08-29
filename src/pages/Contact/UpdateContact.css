@@ -1,4 +1,4 @@
-#contact {
+#updateContact {
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -6,6 +6,6 @@
     flex-direction: column;
 }
 
-#contact .contact__title {
+#updateContact .updateContact__title {
     margin-bottom: 40px;
 }

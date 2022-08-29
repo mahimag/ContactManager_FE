@@ -39,7 +39,6 @@ const ContactForm = () => {
       });
 
       if (res.data.data) {
-        console.log("Contact created successfully");
         navigate("/contact");
       }
     } catch (error) {

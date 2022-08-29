@@ -1,8 +1,3 @@
-/* .register h1 {
-    font-size: 50px;
-    padding-top: 20px;
-} */
-
 .register {
     height: 100vh;
     display: flex;
@@ -22,5 +17,5 @@
 }
 
 .register .register__title {
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }

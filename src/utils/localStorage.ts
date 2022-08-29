@@ -20,6 +20,7 @@ export const addDefaultsToAxios = () => {
   axios.defaults.baseURL = "http://localhost:3001";
   if (accessToken) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+    axios.defaults.headers.common["Content-Type"] = "Application/json";
   }
 };
 

@@ -3,7 +3,7 @@ import React from "react";
 import RegisterForm from "../../components/registerForm/RegisterForm";
 import "./Register.css";
 
-const register: React.FC = () => {
+const Register: React.FC = () => {
   const { Title } = Typography;
 
   return (
@@ -15,4 +15,4 @@ const register: React.FC = () => {
     </div>
   );
 };
-export default register;
+export default Register;

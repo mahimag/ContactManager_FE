@@ -12,7 +12,7 @@ export default function NavBar() {
   };
   return (
     <nav className="nav">
-      <a href="/home" className="site-title">
+      <a href="/contact" className="site-title">
         Contact Manager
       </a>
       <ul>

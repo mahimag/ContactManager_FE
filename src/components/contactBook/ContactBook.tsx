@@ -42,7 +42,7 @@ const columns: ColumnsType<Contact> = [
     dataIndex: "",
     key: "x",
     render: (_, record) => (
-      <div className="actions">
+      <div id="actions">
         <Button
           onClick={() => {
             onDeleteHandler(+record.id);

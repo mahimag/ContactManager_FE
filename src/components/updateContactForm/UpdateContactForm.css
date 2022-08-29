@@ -1,0 +1,15 @@
+#UpdateContactForm{
+    width: 400px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+#UpdateContactForm label{
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+#UpdateContactForm .UpdateContactForm__btn{
+    margin-top: 45px;
+}

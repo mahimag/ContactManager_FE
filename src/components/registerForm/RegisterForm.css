@@ -5,15 +5,15 @@
     align-items: center;
 }
 
-#registerForm .registerForm__btn {
+#registerForm #registerForm__btn {
     margin-top: 40px;
     width: 70%;
 }
 
-#registerForm .registerForm__item {
+#registerForm #registerForm__item {
     padding-left: 100px;
-}
+} 
 
-#registerForm a {
+#registerForm #registerForm__btn a {
     margin-left: 10px;
 }
