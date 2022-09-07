@@ -58,7 +58,7 @@ const columns: ColumnsType<Contact> = [
   },
 ];
 
-const ContactBook: React.FC = () => {
+const ContactBook = () => {
   useEffect(() => {
     getData(1);
   }, []);
@@ -71,21 +71,21 @@ const ContactBook: React.FC = () => {
       },
     })
       .then((res) => {
-        setData(res.data.data);
+        const newData = res.data.data.map((item: Contact, idx: number) => {
+          return {
+            ...item,
+            key: idx,
+          };
+        });
+        setData(newData);
       })
       .catch((err) => {
         console.log(err);
       });
   };
   const [data, setData] = useState<Contact[]>([]);
-  return (
-    <Table
-      className="contactbook"
-      columns={columns}
-      dataSource={data}
-      key="photo"
-    />
-  );
+
+  return <Table className="contactbook" columns={columns} dataSource={data} />;
 };
 
 export default ContactBook;

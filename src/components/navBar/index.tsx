@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import { clearLocalStorage } from "../../utils/localStorage";
+import { clearLocalStorage, isUserLoggedIn } from "../../utils/localStorage";
 import "./styles.css";
 
 export default function NavBar() {
@@ -10,6 +10,7 @@ export default function NavBar() {
     clearLocalStorage();
     navigate("/login");
   };
+
   return (
     <nav className="nav">
       <a href="/contact" className="site-title">

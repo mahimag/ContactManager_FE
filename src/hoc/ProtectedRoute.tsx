@@ -1,10 +1,11 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { isUserLoggedIn } from "../utils/localStorage";
 
 const ProtectedRoute = () => {
-  const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn") as string);
+  // const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn") as string);
 
-  return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
+  return isUserLoggedIn() ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;

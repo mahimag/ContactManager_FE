@@ -10,11 +10,7 @@ import { isUserLoggedIn } from "../utils/localStorage";
 export default function Routing() {
   return (
     <Routes>
-      {/* <Route path="/" element={<Navigate to={"/contact"} />} /> */}
-      <Route
-        path="/login"
-        element={isUserLoggedIn() ? <Navigate to="/contact" /> : <Login />}
-      />
+      <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
       {/* higher order component (Protected route) -> Nesting the routes -- before you can access the inside route you need to pass through the protected route */}

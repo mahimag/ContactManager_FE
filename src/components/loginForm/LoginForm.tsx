@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 import {
   addAccessTokensToLocalStorage,
   addDefaultsToAxios,
+  isUserLoggedIn,
 } from "../../utils/localStorage";
 import "./LoginForm.css";
 
 const LoginForm: React.FC = () => {
+  console.log("we are inside login", isUserLoggedIn());
   const navigate = useNavigate();
 
   const onFinish = async (values: any) => {
