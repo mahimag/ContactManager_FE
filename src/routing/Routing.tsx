@@ -5,12 +5,12 @@ import UpdateContact from "../pages/Contact/UpdateContact";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
-import { isUserLoggedIn } from "../utils/localStorage";
 
 export default function Routing() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
+      <Route path="/ContactManager_FE" element={<Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
