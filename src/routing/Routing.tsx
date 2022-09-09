@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "../hoc/ProtectedRoute";
 import Contact from "../pages/Contact/Contact";
 import UpdateContact from "../pages/Contact/UpdateContact";

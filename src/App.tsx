@@ -8,7 +8,7 @@ const App: React.FC = () => {
   addDefaultsToAxios();
   return (
     <div className="App">
-      <BrowserRouter basename="{process.env.PUBLIC_URL}">
+      <BrowserRouter>
         <Routing />
       </BrowserRouter>
     </div>

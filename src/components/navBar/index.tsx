@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import { clearLocalStorage, isUserLoggedIn } from "../../utils/localStorage";
+import { clearLocalStorage } from "../../utils/localStorage";
 import "./styles.css";
 
 export default function NavBar() {
