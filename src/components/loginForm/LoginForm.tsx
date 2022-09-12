@@ -1,7 +1,7 @@
 import { Button, Form, Input } from "antd";
 import axios from "axios";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   addAccessTokensToLocalStorage,
   addDefaultsToAxios,
@@ -76,7 +76,7 @@ const LoginForm: React.FC = () => {
         </Button>
       </Form.Item>
       <p>
-        Not a member? <a href="/register">Register!</a>
+        Not a member? <Link to="/register">Register!</Link>
       </p>
     </Form>
   );

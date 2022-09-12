@@ -17,7 +17,9 @@ export const addAccessTokensToLocalStorage = (
  */
 export const addDefaultsToAxios = () => {
   const accessToken = localStorage.getItem("accessToken");
-  axios.defaults.baseURL = "http://localhost:3001";
+  axios.defaults.baseURL = "https://ancient-woodland-86994.herokuapp.com/";
+  // axios.defaults.baseURL = "http://localhost:3001/";
+
   if (accessToken) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
     axios.defaults.headers.common["Content-Type"] = "Application/json";
