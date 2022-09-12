@@ -5,6 +5,7 @@ import { HeartOutlined, HeartFilled } from "@ant-design/icons";
 import "./ContactBook.css";
 import { Contact } from "../../interfaces/Contact";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const onDeleteHandler = async (id: number) => {
   await axios.delete(`/contacts/${id}`);
@@ -51,7 +52,7 @@ const columns: ColumnsType<Contact> = [
           Delete
         </Button>
         <Button>
-          <a href={`/contact/update/${record.id}`}>Update</a>
+          <Link to={`/contact/update/${record.id}`}>Update</Link>
         </Button>
       </div>
     ),
