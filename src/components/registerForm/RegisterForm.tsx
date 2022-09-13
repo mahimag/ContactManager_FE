@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const RegisterForm: React.FC = () => {
@@ -72,7 +72,7 @@ const RegisterForm: React.FC = () => {
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
-        <a href="/login">Cancel.</a>
+        <Link to="/login">Cancel.</Link>
       </Form.Item>
     </Form>
   );

@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { clearLocalStorage } from "../../utils/localStorage";
 import "./styles.css";
 
@@ -13,9 +13,9 @@ export default function NavBar() {
 
   return (
     <nav className="nav">
-      <a href="/contact" className="site-title">
+      <Link to="/contact" className="site-title">
         Contact Manager
-      </a>
+      </Link>
       <ul>
         <li>
           <Button onClick={onLogoutHandler}>Signout</Button>
